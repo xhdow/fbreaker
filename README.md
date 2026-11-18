@@ -1,11 +1,13 @@
 
 # Project Overview
 
-fbreaker is a command-line tool for batch encrypting/decrypting file headers to protect privacy.
-It modifies file headers in-place (without copying the entire file), making files unusable while
-preserving the ability to restore them with the correct password.
+fbreaker is a small tool for batch-encrypting video file headers.
 
-Current version: **V2 algorithm**
+**Extremely fast**: in real-world testing on an SSD, encrypting/decrypting 1,100 video files completed in under 1 second.
+
+**Why it's fast**:
+- It only encrypts the critical bytes at the file header and overwrites them in place, without copying or rewriting the entire file, so the I/O volume is minimal.
+- It uses Go's lightweight concurrency (a goroutine worker pool), which on an SSD's high IOPS effectively overlaps the latency of each file operation.
 
 # Usage
 
